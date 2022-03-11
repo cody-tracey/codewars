@@ -20,12 +20,9 @@ const validParentheses = (parens) => {
         //Get an arr to make it easier to compare
         let arr = parens.split("");
 
-let c = 0;
-        //Standard loop
+        //Standard while loop
         while (arr.length > 0 && res === true) {
-            c++;
-            console.log(c)
-            console.log(arr.join(''))
+
             if (!arr.includes(')') || !arr.includes('(')) res = false;
 
             for (let i = 0; i < arr.length; i++) {
@@ -34,22 +31,18 @@ let c = 0;
                 if (arr[i] === ')') {
                     //If immediately before the start of the close we have an open, we take that part out and use recusrsion to repeat the process slowly cutting down our string
                     if (arr[checkI] === '(') {
-                        console.log(arr[checkI],'---')
                         arr.splice(checkI, 2);
-                        continue;
+                        break;
                     }
                     else if (arr[checkI] === ')') {
-                        // console.log(`arr[i] = ${arr[i]}\ti = ${i}\narr[checkI] = ${arr[checkI]}\tcheckI = ${checkI}`)
                         res = false;
+                        return res;
                     }
                 }
             };
         }
-        // return false;
+        return res;
     };
-
-
-
 };
 
 //Test Cases:
@@ -61,7 +54,9 @@ let c = 0;
 // console.log(validParentheses("()()((()") === false);
 // console.log(validParentheses("()") === true);
 // console.log(validParentheses("((((()))))") === true);
-console.log(validParentheses("(()()()())(())") === true);
+// console.log(validParentheses("(()()()())(())") === true);
 // console.log(validParentheses("(())((()((()))))") === true);
+console.log(validParentheses("()))") === false);
+
 
 
