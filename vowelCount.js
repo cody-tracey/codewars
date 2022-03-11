@@ -6,10 +6,13 @@ The input string will only consist of lower case letters and/or spaces.
 */
 
 const getCount = str => {
+    //Count variable
     let vowelsCount = 0;
 
+    //Split to use arr methods
     let strArr = str.split('');
 
+    //Loop over it and check to see if it is a vowel and if so increment the count
     strArr.map(i => {
         switch (i) {
             case 'a':
