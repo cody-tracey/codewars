@@ -12,6 +12,9 @@ Constraints
 
 const validParentheses = parens => {
 
+    //Early Test Cases
+    if(parens.length === 0) return true;
+    else if (parens.length % 2 !== 0) return false;
 
 };
 
