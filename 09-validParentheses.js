@@ -18,23 +18,26 @@ const validParentheses = parens => {
     else {
         //Get an arr to make it easier to compare
         let arr = parens.split("");
+        if (!arr.includes(')')) return false
+        if (!arr.includes('(')) return false
+
         //Standard loop
-        for (let i = 0; i < arr.length; i++) {
-            let checkI = i - 1;
-            //We are only looking for the starting char to the second half of the equation
-            // console.log(arr[i],i)
-            if (arr[i] === ')') {
-                //If immediately before the start of the close we have an open, we take that part out and use recusrsion to repeat the process slowly cutting down our string
-                if (arr[checkI] === '(') {
-                    arr.splice(checkI, 2);
-                    //If we have no more string everything matched up so we can return true.
-                    if (arr.length === 0) return true;
-                    else validParentheses(arr.join(''));
-                }
-                else return false;
-            }
-        };
-        return false;
+        // for (let i = 0; i < arr.length; i++) {
+        //     let checkI = i - 1;
+        //     //We are only looking for the starting char to the second half of the equation
+        //     // console.log(arr[i],i)
+        //     if (arr[i] === ')') {
+        //         //If immediately before the start of the close we have an open, we take that part out and use recusrsion to repeat the process slowly cutting down our string
+        //         if (arr[checkI] === '(') {
+        //             arr.splice(checkI, 2);
+        //             //If we have no more string everything matched up so we can return true.
+        //             if (arr.length === 0) return true;
+        //             else validParentheses(arr.join(''));
+        //         }
+        //         else return false;
+        //     }
+        // };
+        // return false;
     };
 };
 
@@ -45,7 +48,7 @@ const validParentheses = parens => {
 // console.log(validParentheses("()") === true);
 // console.log(validParentheses("())") === false);
 // console.log(validParentheses("()()((()") === false);
-console.log(validParentheses("()()") === true);
+console.log(validParentheses("()"));
 // console.log(validParentheses("((((()))))") === true);
 // console.log(validParentheses("(()()()())(())") === true);
 // console.log(validParentheses("(())((()((()))))") === true);
