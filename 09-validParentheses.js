@@ -46,19 +46,22 @@ const validParentheses = (parens) => {
     };
 };
 
+
 //Test Cases:
-// console.log(validParentheses("(") === false);
-// console.log(validParentheses(")") === false);
-// console.log(validParentheses("") === true);
-// console.log(validParentheses("()") === true);
-// console.log(validParentheses("())") === false);
-// console.log(validParentheses("()()((()") === false);
-// console.log(validParentheses("()") === true);
-// console.log(validParentheses("((((()))))") === true);
-// console.log(validParentheses("(()()()())(())") === true);
-// console.log(validParentheses("(())((()((()))))") === true);
-// console.log(validParentheses("()))") === false);
+console.log(validParentheses("(") === false);
+console.log(validParentheses(")") === false);
+console.log(validParentheses("") === true);
+console.log(validParentheses("()") === true);
+console.log(validParentheses("())") === false);
+console.log(validParentheses("()()((()") === false);
+console.log(validParentheses("()") === true);
+console.log(validParentheses("((((()))))") === true);
+console.log(validParentheses("(()()()())(())") === true);
+console.log(validParentheses("(())((()((()))))") === true);
+console.log(validParentheses("()))") === false);
 console.log(validParentheses("())(") === false);
+console.log(validParentheses("))((") === false);
+
 
 
 
