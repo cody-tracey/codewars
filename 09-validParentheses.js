@@ -19,10 +19,11 @@ const validParentheses = (parens) => {
         let res = true;
         //Get an arr to make it easier to compare
         let arr = parens.split("");
-
+        let c = 0;
         //Standard while loop
-        while (arr.length > 0 && res === true) {
-
+        while (arr.length > 0 && res === true && c < 10) {
+            c++;
+            console.log(c, arr)
             if (!arr.includes(')') || !arr.includes('(')) res = false;
 
             for (let i = 0; i < arr.length; i++) {
@@ -34,7 +35,7 @@ const validParentheses = (parens) => {
                         arr.splice(checkI, 2);
                         break;
                     }
-                    else if (arr[checkI] === ')') {
+                    else if (arr[checkI] === ')' || checkI === -1) {
                         res = false;
                         return res;
                     }
@@ -56,7 +57,8 @@ const validParentheses = (parens) => {
 // console.log(validParentheses("((((()))))") === true);
 // console.log(validParentheses("(()()()())(())") === true);
 // console.log(validParentheses("(())((()((()))))") === true);
-console.log(validParentheses("()))") === false);
+// console.log(validParentheses("()))") === false);
+console.log(validParentheses("())(") === false);
 
 
 
