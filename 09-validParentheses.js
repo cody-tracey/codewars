@@ -11,11 +11,29 @@ Constraints
 */
 
 const validParentheses = parens => {
-
     //Early Test Cases
-    if(parens.length === 0) return true;
+    if (parens.length === 0) return true;
     else if (parens.length % 2 !== 0) return false;
-
+    else if (!parens.includes(')') || !parens.includes('(')) return false;
+    //Main Testing
+    else {
+        //Get an arr to make it easier to compaer
+        let arr = parens.split("");
+        //Standard loop
+        for (let i = 0; i < arr.length; i++) {
+            //We are only looking for the starting char to the second half of the equation
+            if (arr[i] === ')') {
+                //If immediately before the start of the close we have an open, we take that part out and use recusrsion to repeat the process slowly cutting down our string
+                if (arr[i - 1] === '(') {
+                    arr.splice(i - 1, 2);
+                    //If we have no more string everything matched up so we can return true.
+                    if (arr.length === 0) return true;
+                    else validParentheses(arr.join(''));
+                }
+                else return false;
+            }
+        };
+    };
 };
 
 //Test Cases:
