@@ -18,21 +18,28 @@ For those who don't know the game, here are some information about rules and how
 */
 
 
-const done_or_not = board => {
+const doneOrNot = board => {
     let test = '123456789'
     let done = true;
 
+    let toCheck = [...board];
 
     //Check to see if each row has 1-9
-    board.map(i => {
-        let copy = i;
-        copy.sort().join('')
-        if(copy !== test){
-            done = false;
-        }
-    })
+    // board.map(i => {
+    //     let copy = i;
+    //     copy.sort().join('')
+    //     if(copy !== test){
+    //         done = false;
+    //     }
+    // })
 
     //Check to see if each column has 1-9
+    for(let i = 0; i < board.length; i++){
+        let temp = [];
+        board.map(item => temp.push(item[i]));
+        toCheck.push(temp)
+    }
+
 
     return done ? "Finished!" : "Try again!"
 };
