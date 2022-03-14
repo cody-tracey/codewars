@@ -23,17 +23,8 @@ const doneOrNot = board => {
 
     let done = true;
 
+    //Add all my rows to my master 'row format' array, will be adding more to this.
     let toCheck = [...board];
-    
-
-    //Check to see if each row has 1-9
-    // board.map(i => {
-    //     let copy = i;
-    //     copy.sort().join('')
-    //     if(copy !== test){
-    //         done = false;
-    //     }
-    // })
 
     //Get my columns in row format
     for (let i = 0; i < board.length; i++) {
@@ -44,7 +35,19 @@ const doneOrNot = board => {
 
     //Get my regions in row format
 
+
+
+
     
+    // Check to see if each row has 1-9
+    toCheck.map(i => {
+        let copy = i;
+        copy.sort().join('')
+        if (copy !== test) {
+            done = false;
+        }
+    })
+
     return done ? "Finished!" : "Try again!"
 };
 
