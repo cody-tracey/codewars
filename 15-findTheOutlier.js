@@ -9,10 +9,12 @@ Should return: 160 (the only even number)
 */
 
 const findOutlier = integers => {
+
     let outlier;
     let test = 0;
     let counter = 0;
 
+    //Checking to see if I need to search for odd or even
     for (let i = 0; i < 3; i++) {
         if (integers[i] % 2 === 0) {
             test++;
@@ -21,8 +23,10 @@ const findOutlier = integers => {
         };
     };
 
+    //Determining what my remainder should be when testing
     test < 0 ? test = 1 : test = 0; 
 
+    //While I have not solved the puzzle yet I will divide each number by 2 to see if it is odd or even, and then compare to the test to see if it matches the others or is the outlier.
     while (outlier === undefined) {
         if (Math.abs(integers[counter] % 2) !== test) {
             outlier = integers[counter]
