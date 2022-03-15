@@ -11,6 +11,7 @@ Have fun!
 */
 
 const pickPeaks = arr => {
+    // console.log(arr)
     let res = {
         pos: [],
         peaks: []
@@ -20,38 +21,33 @@ const pickPeaks = arr => {
     if (arr.length === 0) return res;
 
     //Remove the first & last item(s) as we do not need them.
-    let temp = [...arr]
-    let last = {
-        item: arr.pop(),
-        count: 0
-    };
-    let first = {
-        item: arr.shift()
-    };
-    while (temp[0] === first.item || temp[temp.length - 1] === last.item) {
-        if (temp[0] === first.item) temp.shift();
-        if (temp[temp.length - 1] === last.item) temp.pop(); last.count++;
+
+    let lastItem = arr.pop();
+    let firstItem = arr.shift();
+
+    while (arr[0] === firstItem || arr[arr.length - 1] === lastItem) {
+        if (arr[0] === firstItem) arr.shift();
+        if (arr[arr.length - 1] === lastItem) arr.pop();
     };
 
-    temp = temp.reverse();
 
-    while(temp[0] > temp[1]){
-        temp.shift()
+    //Removing the final climb as it never peaks
+    while (arr[arr.length - 1] > arr[arr.length - 2] && arr[arr.length-1] < lastItem) {
+        arr.pop()
     }
 
-    arr = temp.reverse()
-
     let peak = arr[0];
-    let pos = 0;
+    let pos = 1;
 
     arr.map((item, index) => {
+        //If the current item is greater than the next item, and greater than the previous item we set it as the current peak/pos
         // console.log(`I:${index}\tPrevious: ${arr[index - 1]}\tCurrent: ${item}\tNext: ${arr[index + 1]}\tPos:${pos}\tPeak:${peak}`);
-
+        // console.log(item >= arr[index + 1])
         if (item >= arr[index + 1] && item > arr[index - 1]) {
-
             peak = item;
             pos = index + 1;
         }
+        // If the current item is less than the previous and the next item we push the peak/pos to the res and 'reset' the peak/pos
         else if (item < arr[index - 1] && item < arr[index + 1]) {
             res.pos.push(pos);
             res.peaks.push(peak);
@@ -60,24 +56,19 @@ const pickPeaks = arr => {
             pos = index;
         };
 
-        if (index === arr.length - 1 && pos !== res.pos[res.pos.length - 1]) {
-            // console.log(item, last.item, '----')
-            // if (item >= last.item) {
+        // If we are on the last item and we have not pushed this current peak/pos we do so
+        if (index === arr.length - 1) {
+            if(item > lastItem && item > arr[index - 1]){
+                res.pos.push(index+1);
+                res.peaks.push(item)
+            }else if(pos !== res.pos[res.pos.length - 1]){
                 res.pos.push(pos);
-                res.peaks.push(peak);
-            // } else if (item < last.item && last.count > 1) {
-            //     res.pos.push(pos);
-            //     res.peaks.push(peak);
-            // }
+                res.peaks.push(peak);    
+            }
+
         }
 
     });
-
-
-
-
-
-
 
     return res
 };
@@ -93,3 +84,27 @@ console.log(pickPeaks([2, 1, 3, 2, 2, 2, 2, 1]), { pos: [2], peaks: [3] });
 console.log(pickPeaks([1, 2, 5, 4, 3, 2, 3, 6, 4, 1, 2, 3, 3, 4, 5, 3, 2, 1, 2, 3, 5, 5, 4, 3]), { pos: [2, 7, 14, 20], peaks: [5, 6, 5, 5] });
 console.log(pickPeaks([]), { pos: [], peaks: [] });
 console.log(pickPeaks([1, 1, 1, 1]), { pos: [], peaks: [] });
+// console.log(pickPeaks([14, -1, 8, 4, 0, 2, 2, 0, 11, 5]), { pos: [2, 5, 8], peaks: [8, 2, 11] });
+
+
+
+
+/*
+
+expected { pos: [ 0, 3, 5, 10, 12, 14 ], peaks: [ 15, 0, 0, 11, 4, 10 ] } to deeply equal { pos: [ 1, 3, 5, 10, 12, 14 ], peaks: [ 15, 0, 0, 11, 4, 10 ] }
+
+expected { pos: [ 2, 4, 8, 10, 13, 16, 19, 21, 24, 31, 35, 38 ],
+    peaks: [ 2, 7, 10, 14, 6, 8, 13, 9, 13, 14, 8, 3 ] } to deeply equal { pos: [ 2, 4, 8, 10, 13, 16, 19, 21, 24, 28, 31, 35, 38 ],
+    peaks: [ 2, 7, 10, 14, 6, 8, 13, 9, 13, 7, 14, 8, 3 ] }
+
+expected { pos: [ 2, 4, 9, 11, 13, 15, 17, 20, 22, 25, 27, 37 ],
+  peaks: [ 15, 6, 13, 11, 7, 13, 6, 15, 14, 13, 12, 11 ] } to deeply equal { pos: [ 2, 4, 9, 11, 13, 15, 17, 20, 22, 25, 27, 30, 37 ],
+  peaks: [ 15, 6, 13, 11, 7, 13, 6, 15, 14, 13, 12, 14, 11 ] }
+
+Log
+[ 5, 6, 3, 7 ]
+expected { pos: [ 0 ], peaks: [ 6 ] } to deeply equal { pos: [ 1 ], peaks: [ 6 ] }
+
+
+
+*/
