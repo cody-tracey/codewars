@@ -16,6 +16,9 @@ const pickPeaks = arr => {
         peaks: []
     };
 
+    //Early return if arr is empty otherwise we will get stuck in a for loop.
+    if(arr.length === 0) return res;
+
     //Remove the last item(s) as we do not need it.
     let temp = [...arr].reverse();
     let lastItem = arr[arr.length - 1];
@@ -24,26 +27,47 @@ const pickPeaks = arr => {
     };
 
     arr = temp.reverse();
+    
+    let peak = arr[0];
+    let pos = 0;
 
-    for (let i = 1; i < arr.length; i++) {
-        // console.log(`I:${i}\tPrevious: ${arr[i-1]}\tCurrent: ${arr[i]}\tNext: ${arr[i+1]}`)
-        if (arr[i] >= arr[i + 1] && arr[i] > arr[i - 1]) {
-            res.pos.push(i)
-            res.peaks.push(arr[i])
+    arr.map((item, index) => {
+        // console.log(`I:${index}\tPrevious: ${arr[index - 1]}\tCurrent: ${item}\tNext: ${arr[index + 1]}\tPeak:${peak}\tPos:${pos}`)
+        if (item >= arr[index + 1] && item > arr[index - 1]) {
+            peak = item;
+            pos = index;
         }
-    };
+        else if (item < arr[index - 1] && item < arr[index + 1]) {
+            res.pos.push(pos);
+            res.peaks.push(peak);
+            peak = item;
+            pos = index;
+        };
+
+        if (index === arr.length - 1 && pos !== res.pos[res.pos.length-1]) {
+            res.pos.push(pos);
+            res.peaks.push(peak);
+        }
+
+    });
+
+
+
+
+
+
 
     return res
 };
 
 //Test Cases:
 // console.log(pickPeaks([1, 2, 3, 6, 4, 1, 2, 3, 2, 1]), { pos: [3, 7], peaks: [6, 3] });
-// console.log(pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3]), { pos: [3, 7], peaks: [6, 3] });
-// console.log(pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 2, 2, 1]), { pos: [3, 7, 10], peaks: [6, 3, 2] });
-// console.log(pickPeaks([2, 1, 3, 1, 2, 2, 2, 2, 1]), { pos: [2, 4], peaks: [3, 2] });
-// console.log(pickPeaks([2, 1, 3, 1, 2, 2, 2, 2]), { pos: [2], peaks: [3] });
-// console.log(pickPeaks([2, 1, 3, 2, 2, 2, 2, 5, 6]), { pos: [2], peaks: [3] });
-// console.log(pickPeaks([2, 1, 3, 2, 2, 2, 2, 1]), { pos: [2], peaks: [3] });
-console.log(pickPeaks([1, 2, 5, 4, 3, 2, 3, 6, 4, 1, 2, 3, 3, 4, 5, 3, 2, 1, 2, 3, 5, 5, 4, 3]), { pos: [2, 7, 14, 20], peaks: [5, 6, 5, 5] });
+console.log(pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3]), { pos: [3, 7], peaks: [6, 3] });
+console.log(pickPeaks([3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 2, 2, 1]), { pos: [3, 7, 10], peaks: [6, 3, 2] });
+console.log(pickPeaks([2, 1, 3, 1, 2, 2, 2, 2, 1]), { pos: [2, 4], peaks: [3, 2] });
+console.log(pickPeaks([2, 1, 3, 1, 2, 2, 2, 2]), { pos: [2], peaks: [3] });
+console.log(pickPeaks([2, 1, 3, 2, 2, 2, 2, 5, 6]), { pos: [2], peaks: [3] });
+console.log(pickPeaks([2, 1, 3, 2, 2, 2, 2, 1]), { pos: [2], peaks: [3] });
+// console.log(pickPeaks([1, 2, 5, 4, 3, 2, 3, 6, 4, 1, 2, 3, 3, 4, 5, 3, 2, 1, 2, 3, 5, 5, 4, 3]), { pos: [2, 7, 14, 20], peaks: [5, 6, 5, 5] });
 // console.log(pickPeaks([]), { pos: [], peaks: [] });
 // console.log(pickPeaks([1, 1, 1, 1]), { pos: [], peaks: [] });
