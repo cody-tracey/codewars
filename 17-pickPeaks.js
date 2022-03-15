@@ -21,14 +21,25 @@ const pickPeaks = arr => {
 
     //Remove the first & last item(s) as we do not need them.
     let temp = [...arr]
-    let lastItem = arr[arr.length - 1];
-    let firstItem = arr[0];
-    while (temp[0] === firstItem || temp[temp.length - 1] === lastItem) {
-        if (temp[0] === firstItem) temp.shift();
-        if (temp[temp.length - 1] === lastItem) temp.pop();
+    let last = {
+        item: arr.pop(),
+        count: 0
+    };
+    let first = {
+        item: arr.shift()
+    };
+    while (temp[0] === first.item || temp[temp.length - 1] === last.item) {
+        if (temp[0] === first.item) temp.shift();
+        if (temp[temp.length - 1] === last.item) temp.pop(); last.count++;
     };
 
-    arr = temp;
+    temp = temp.reverse();
+
+    while(temp[0] > temp[1]){
+        temp.shift()
+    }
+
+    arr = temp.reverse()
 
     let peak = arr[0];
     let pos = 0;
@@ -42,7 +53,6 @@ const pickPeaks = arr => {
             pos = index + 1;
         }
         else if (item < arr[index - 1] && item < arr[index + 1]) {
-            // console.log('Here -')
             res.pos.push(pos);
             res.peaks.push(peak);
 
@@ -51,8 +61,14 @@ const pickPeaks = arr => {
         };
 
         if (index === arr.length - 1 && pos !== res.pos[res.pos.length - 1]) {
-            res.pos.push(pos);
-            res.peaks.push(peak);
+            // console.log(item, last.item, '----')
+            // if (item >= last.item) {
+                res.pos.push(pos);
+                res.peaks.push(peak);
+            // } else if (item < last.item && last.count > 1) {
+            //     res.pos.push(pos);
+            //     res.peaks.push(peak);
+            // }
         }
 
     });
