@@ -20,13 +20,9 @@ const pickPeaks = arr => {
     //Early return if arr is empty otherwise we will get stuck in a for loop.
     if (arr.length === 0) return res;
 
-    //Remove the first & last item(s) as we do not need them.
-
+    //Remove the last item(s) as we do not need them.
     let lastItem = arr.pop();
-    let firstItem = arr.shift();
-
-    while (arr[0] === firstItem || arr[arr.length - 1] === lastItem) {
-        if (arr[0] === firstItem) arr.shift();
+    while (arr[arr.length - 1] === lastItem) {
         if (arr[arr.length - 1] === lastItem) arr.pop();
     };
 
@@ -39,37 +35,43 @@ const pickPeaks = arr => {
     let peak;
     let pos;
 
-    arr.map((item, index) => {
+
+    for (let i = 1; i < arr.length; i++) {
+        //Save myself some writing and keep it dry
+        let curr = arr[i];
+        let next = arr[i + 1];
+        let prev = arr[i - 1];
+
+        console.log(`I:${i}\tPrevious: ${prev}\tCurrent: ${curr}\tNext: ${next}\tPos:${pos}\tPeak:${peak}`);
+
         //If the current item is greater than the next item, and greater than the previous item we set it as the current peak/pos
-        console.log(`I:${index}\tPrevious: ${arr[index - 1]}\tCurrent: ${item}\tNext: ${arr[index + 1]}\tPos:${pos}\tPeak:${peak}`);
-        if (item >= arr[index + 1] && item > arr[index - 1]) {
-            peak = item;
-            pos = index + 1;
+        if (curr >= next && curr > prev) {
+            peak = curr;
+            pos = i;
         }
         // If the current item is less than the previous and the next item we push the peak/pos to the res and 'reset' the peak/pos
-        else if (item < arr[index - 1] && item < arr[index + 1] && peak !== undefined) {
+        else if (curr < prev && curr < next && peak !== undefined) {
 
             res.pos.push(pos);
             res.peaks.push(peak);
 
-            peak = item;
-            pos = index;
+            peak = curr;
+            pos = i;
         };
 
         // If we are on the last item and we have not pushed this current peak/pos we do so
-        if (index === arr.length - 1) {
-            if (item > lastItem && item > arr[index - 1]) {
-                res.pos.push(index + 1);
-                res.peaks.push(item)
+        if (i === arr.length - 1) {
+            if (curr > lastItem && curr > prev) {
+                res.pos.push(i);
+                res.peaks.push(curr)
             } else if (pos !== res.pos[res.pos.length - 1] && pos !== undefined) {
                 res.pos.push(pos);
                 res.peaks.push(peak);
             }
 
-        }
+        };
 
-    });
-
+    };
     return res
 };
 
