@@ -11,7 +11,7 @@ Have fun!
 */
 
 const pickPeaks = arr => {
-    // console.log(arr)
+    console.log(arr)
     let res = {
         pos: [],
         peaks: []
