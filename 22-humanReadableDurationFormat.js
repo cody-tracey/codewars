@@ -22,8 +22,9 @@ const formatDuration = seconds => {
     if(seconds === 0) return 'now'
 
     let countdown = seconds;
-    let date = [0,0,0,0,0]
-    let time = [31536000,86400,3600,60,1]
+    let date = [0,0,0,0,0];
+    let time = [31536000,86400,3600,60,1];
+    let units = ['year','day','hour','minute','second'];
 
     time.map((item,index) => {
         while(countdown > 0 && item <= countdown){
@@ -32,6 +33,21 @@ const formatDuration = seconds => {
         };
     });
 
+    let str = date.map((item,index) => {
+        if(item !== 0){
+            return item > 1 ? `${item} ${units[index]}s` : `${item} ${units[index]}`
+
+        }
+        else return item;
+    }).filter(i => i !== 0);
+
+    if(str.length === 1) return str.join('')
+    else if (str.length === 2) return str.join(' and ')
+    else{
+        let last = str.pop();
+        
+        return `${str.join(', ')} and ${last}`;
+    };
 };
 
 
