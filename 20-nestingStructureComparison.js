@@ -28,37 +28,52 @@ Array.prototype.sameStructureAs = function (other) {
 
     let holder1 = [];
     let holder2 = [];
-
     let temp1 = [...this];
     let temp2 = [...other];
 
+
+
     while (res && temp1.length > 0) {
+
         let item1 = temp1.shift();
         let item2 = temp2.shift();
 
-        console.log(temp1,'|',temp2)
+        // console.log(temp1,'|',temp2)
         console.log(item1,'||',item2)
-        console.log(Array.isArray(item1) ,'|||', Array.isArray(item2))
+        // console.log(Array.isArray(item1) ,'|||', Array.isArray(item2))
 
+        if(item1.length !== item2.length){
+            res = false;
+            break;
+        }
         if (Array.isArray(item1) === Array.isArray(item2)) {
             if (Array.isArray(item1)) {
-                holder1.push(item1);
-                holder2.push(item2);
+                holder1.push(...item1);
+                holder2.push(...item2);
             }
         } else {
             res = false;
         };
 
-        if (holder1.length === 0) {
-            return res;
-        } else {
-            holder1 = temp1;
-            holder2 = temp2;
+        if(temp1.length === 0 && temp2.length === 0){
+            temp1 = holder1;
+            holder1 = [];
+    
+            temp2 = holder2;
+            holder2 = [];
+        }
 
+
+        console.log(temp1 + '<-Temp 1')
+        console.log(temp2, '<-Temp 2')
+        console.log('-------------')
+
+        // console.log(holder1)
+        if (temp1.length === 0) {
+            return res;
         }
 
     };
-
     return res
 
 
@@ -76,19 +91,22 @@ Will be using this a lot.
 
 
 //Test Cases:
-let test1 = [1, 1, []].sameStructureAs([2, 2, 2]);
-let test2 = [1, [1, 1]].sameStructureAs([2, [2, 2]]);
-let test3 = [1, [1, 1]].sameStructureAs([[2, 2], 2]);
-let test4 = [1, [1, 1]].sameStructureAs([[2], 2]);
-let test5 = [[[], []]].sameStructureAs([[[], []]]);
-let test6 = [[[], []]].sameStructureAs([[1, 1]]);
+// let test1 = [1, 1, []].sameStructureAs([2, 2, 2]);
+// let test2 = [1, [1, 1]].sameStructureAs([2, [2, 2]]);
+// let test3 = [1, [1, 1]].sameStructureAs([[2, 2], 2]);
+// let test4 = [1, [1, 1]].sameStructureAs([[2], 2]);
+// let test5 = [[[], []]].sameStructureAs([[[], []]]);
+// let test6 = [[[], []]].sameStructureAs([[1, 1]]);
+let test7 = [1, [1, 1]].sameStructureAs([2, [2]]);
 
 // console.log(test1, true);
 // console.log(test2, true);
 // console.log(test3, false);
 // console.log(test4, false);
 // console.log(test5, true);
-console.log(test6, false);
+// console.log(test6, false);
+console.log(test7, false);
+
 
 
 
