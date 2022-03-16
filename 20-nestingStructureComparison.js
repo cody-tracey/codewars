@@ -24,6 +24,8 @@ Array.prototype.sameStructureAs = function (other) {
     // Return 'true' if and only if 'other' has the same
     // nesting structure as 'this'.
 
+    if(Array.isArray(other) === false) return false;
+
     let res = true;
 
     let holder1 = [];
@@ -42,7 +44,7 @@ Array.prototype.sameStructureAs = function (other) {
         // console.log(item1,'||',item2)
         // console.log(Array.isArray(item1) ,'|||', Array.isArray(item2))
 
-        if(item1.length !== item2.length){
+        if(temp1.length !== temp2.length){
             res = false;
             break;
         }
@@ -107,7 +109,7 @@ let test8 = [1,'[',']'].sameStructureAs(['[',']',1]);
 // console.log(test5, true);
 // console.log(test6, false);
 // console.log(test7, false);
-console.log(test8, false);
+console.log(test8, true);
 
 
 
