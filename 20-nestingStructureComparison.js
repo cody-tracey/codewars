@@ -39,7 +39,7 @@ Array.prototype.sameStructureAs = function (other) {
         let item2 = temp2.shift();
 
         // console.log(temp1,'|',temp2)
-        console.log(item1,'||',item2)
+        // console.log(item1,'||',item2)
         // console.log(Array.isArray(item1) ,'|||', Array.isArray(item2))
 
         if(item1.length !== item2.length){
@@ -64,9 +64,9 @@ Array.prototype.sameStructureAs = function (other) {
         }
 
 
-        console.log(temp1 + '<-Temp 1')
-        console.log(temp2, '<-Temp 2')
-        console.log('-------------')
+        // console.log(temp1 + '<-Temp 1')
+        // console.log(temp2, '<-Temp 2')
+        // console.log('-------------')
 
         // console.log(holder1)
         if (temp1.length === 0) {
@@ -97,7 +97,8 @@ Will be using this a lot.
 // let test4 = [1, [1, 1]].sameStructureAs([[2], 2]);
 // let test5 = [[[], []]].sameStructureAs([[[], []]]);
 // let test6 = [[[], []]].sameStructureAs([[1, 1]]);
-let test7 = [1, [1, 1]].sameStructureAs([2, [2]]);
+// let test7 = [1, [1, 1]].sameStructureAs([2, [2]]);
+let test8 = [1,'[',']'].sameStructureAs(['[',']',1]);
 
 // console.log(test1, true);
 // console.log(test2, true);
@@ -105,7 +106,9 @@ let test7 = [1, [1, 1]].sameStructureAs([2, [2]]);
 // console.log(test4, false);
 // console.log(test5, true);
 // console.log(test6, false);
-console.log(test7, false);
+// console.log(test7, false);
+console.log(test8, false);
+
 
 
 
