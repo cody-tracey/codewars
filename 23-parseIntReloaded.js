@@ -15,14 +15,25 @@ All tested numbers are valid, you don't need to validate them
 
 const parseInt = string => {
     let num = 0;
-    let mil = [];
-        thous = [];
-        hun = [];
-        tens = [];
-        ones = [];
+    let str = string.toLowerCase();
 
-//Planning on splitting the text into the categories and building from there, will have to slice the string out from the key word to the left.
+    let keys = ['million', 'thousand', "hundred"];
+    let zeros = ['000000', '000', '']
 
+
+    keys.forEach((item, index) => {
+        let strArr = str.split(' ');
+        let i = strArr.indexOf(item)
+        if (i > -1) {
+            let sub = strArr.splice(0, i + 1);
+            
+        }
+
+
+    });
+
+    //Planning on splitting the text into the categories and building from there, will have to slice the string out from the key word to the left.
+    return num
 }
 
 //Test Cases:
