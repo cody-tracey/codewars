@@ -14,7 +14,6 @@ All tested numbers are valid, you don't need to validate them
 */
 
 const parseInt = string => {
-    console.log(`Here is the string: ${string}`)
     let num = 0;
 
     str = string.toLowerCase().replace(/\band\b|-/g, ' ').replace(/\s\s+/g, " ").trim().split(' ');
@@ -38,11 +37,11 @@ const parseInt = string => {
                 let nIndex = sub.indexOf('hundred') - 1;
                 let n = numArr[numberStr.indexOf(sub[nIndex])];
                 tempNum += n * 100;
-                let j = sub.indexOf('hundred') + 1;
+                let k = sub.indexOf('hundred') + 1;
 
-                for (let i = j; i < sub.length - 1; i++) {
-                    let m = numberStr.indexOf(sub[i]);
-                    tempNum += numArr[m]
+                for (let j = k; j < sub.length - 1; j++) {
+                    let l = numberStr.indexOf(sub[j]);
+                    tempNum += numArr[l]
                 };
 
                 tempNum += zeros[index];
@@ -51,9 +50,9 @@ const parseInt = string => {
 
             }
             else {
-                for (let i = 0; i < sub.length - 1; i++) {
-                    let m = numberStr.indexOf(sub[i]);
-                    tempNum += numArr[m]
+                for (let n = 0; n < sub.length - 1; n++) {
+                    let o = numberStr.indexOf(sub[n]);
+                    tempNum += numArr[o]
                 };
                 tempNum += zeros[index];
 
