@@ -16,8 +16,8 @@ All tested numbers are valid, you don't need to validate them
 const parseInt = string => {
     let num = 0;
     let str = string.toLowerCase();
-    str = str.replace(/and|-/g,' ').replace(/\s\s+/g," ").trim();
-    console.log(str)
+    str = str.replace(/\band\b|-/g, ' ').replace(/\s\s+/g, " ").trim();
+
 
     let keys = ['million', 'thousand', "hundred"];
     let zeros = ['000000', '000', '']
@@ -30,9 +30,11 @@ const parseInt = string => {
 
         let strArr = str.split(' ');
         let i = strArr.indexOf(item)
-
+console.log(item, strArr)
         if (i > -1) {
-            let holder = ''
+
+            console.log(item)
+
             let tempNum = 0;
             let sub = strArr.splice(0, i + 1);
 
@@ -40,8 +42,15 @@ const parseInt = string => {
                 let nIndex = sub.indexOf('hundred') - 1
                 let n = numArr[numberStr.indexOf(sub[nIndex])]
                 tempNum += n * 100;
+                let j = sub.indexOf('hundred') + 1
+                console.log(j, sub.length)
+                for (let i = j; i < sub.length; i++) {
+                    console.log(i)
+                    let m = numberStr.indexOf(sub[i]);
+                    tempNum += numArr[m]
+                }
             }
-
+            console.log(tempNum)
         }
 
 
@@ -54,4 +63,5 @@ const parseInt = string => {
 //Test Cases:
 // console.log(parseInt('one'), 1);
 // console.log(parseInt('twenty'), 20);
-console.log(parseInt('two hundred and forty-six'), 246);
+// console.log(parseInt('two hundred and forty-six'), 246);
+console.log(parseInt('two hundred and forty-six thousand'));
