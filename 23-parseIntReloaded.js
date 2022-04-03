@@ -15,9 +15,8 @@ All tested numbers are valid, you don't need to validate them
 
 const parseInt = string => {
     let num = 0;
-    let str = string.toLowerCase();
-    str = str.replace(/\band\b|-/g, ' ').replace(/\s\s+/g, " ").trim();
 
+    str = string.toLowerCase().replace(/\band\b|-/g, ' ').replace(/\s\s+/g, " ").trim().split(' ');
 
     let keys = ['million', 'thousand', "hundred"];
     let zeros = ['000000', '000', '']
@@ -28,29 +27,31 @@ const parseInt = string => {
     keys.forEach((item, index) => {
 
 
-        let strArr = str.split(' ');
-        let i = strArr.indexOf(item)
-console.log(item, strArr)
+
+
+        let i = str.indexOf(item)
         if (i > -1) {
-
-            console.log(item)
-
             let tempNum = 0;
-            let sub = strArr.splice(0, i + 1);
+
+            let sub = str.splice(0, i + 1);
+
 
             if (sub.includes(keys[2])) {
                 let nIndex = sub.indexOf('hundred') - 1
                 let n = numArr[numberStr.indexOf(sub[nIndex])]
                 tempNum += n * 100;
                 let j = sub.indexOf('hundred') + 1
-                console.log(j, sub.length)
-                for (let i = j; i < sub.length; i++) {
-                    console.log(i)
+
+                for (let i = j; i < sub.length - 1; i++) {
                     let m = numberStr.indexOf(sub[i]);
                     tempNum += numArr[m]
                 }
+
+                tempNum += zeros[index]
+
+                num += Number(tempNum)
+
             }
-            console.log(tempNum)
         }
 
 
@@ -64,4 +65,4 @@ console.log(item, strArr)
 // console.log(parseInt('one'), 1);
 // console.log(parseInt('twenty'), 20);
 // console.log(parseInt('two hundred and forty-six'), 246);
-console.log(parseInt('two hundred and forty-six thousand'));
+console.log(parseInt('two hundred and four thousand'));
