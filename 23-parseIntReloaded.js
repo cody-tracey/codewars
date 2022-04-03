@@ -19,13 +19,20 @@ const parseInt = string => {
 
     let keys = ['million', 'thousand', "hundred"];
     let zeros = ['000000', '000', '']
+    let numberStr = 'one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty fourty fifty sixty seventy eighty ninety'.split(' ')
+    let numArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,30,40,50,60,70,80,90]
 
 
     keys.forEach((item, index) => {
         let strArr = str.split(' ');
         let i = strArr.indexOf(item)
         if (i > -1) {
+            let holder =''
+            let tempNum = 0;
             let sub = strArr.splice(0, i + 1);
+            if(sub.includes(keys[2])){
+                tempNum
+            }
             
         }
 
