@@ -14,14 +14,15 @@ All tested numbers are valid, you don't need to validate them
 */
 
 const parseInt = string => {
+    console.log(`Here is the string: ${string}`)
     let num = 0;
 
     str = string.toLowerCase().replace(/\band\b|-/g, ' ').replace(/\s\s+/g, " ").trim().split(' ');
 
     let keys = ['million', 'thousand', "hundred"];
     let zeros = ['000000', '000', '']
-    let numberStr = 'one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety'.split(' ')
-    let numArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 40, 50, 60, 70, 80, 90]
+    let numberStr = 'zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety'.split(' ')
+    let numArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 30, 40, 50, 60, 70, 80, 90]
 
 
     keys.forEach((item, index) => {
@@ -48,7 +49,16 @@ const parseInt = string => {
 
                 num += Number(tempNum);
 
-            };
+            }
+            else {
+                for (let i = 0; i < sub.length - 1; i++) {
+                    let m = numberStr.indexOf(sub[i]);
+                    tempNum += numArr[m]
+                };
+                tempNum += zeros[index];
+
+                num += Number(tempNum);
+            }
         };
     });
 
@@ -59,12 +69,12 @@ const parseInt = string => {
         });
     };
 
-    //Planning on splitting the text into the categories and building from there, will have to slice the string out from the key word to the left.
     return num
-}
+};
 
 //Test Cases:
-console.log(parseInt('one'), 1);
-console.log(parseInt('twenty'), 20);
-console.log(parseInt('two hundred and forty-six'), 246);
-console.log(parseInt('two hundred and four thousand and nine'),204009);
+// console.log(parseInt('one'), 1);
+// console.log(parseInt('twenty'), 20);
+// console.log(parseInt('two hundred and forty-six'), 246);
+// console.log(parseInt('two hundred and four thousand and nine'),204009);
+console.log(parseInt('six thousand four hundred and thirty-five'), 6435);
