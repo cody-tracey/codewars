@@ -16,6 +16,8 @@ All tested numbers are valid, you don't need to validate them
 const parseInt = string => {
     let num = 0;
     let str = string.toLowerCase();
+    str = str.replace(/and|-/g,' ').replace(/\s\s+/g," ").trim();
+    console.log(str)
 
     let keys = ['million', 'thousand', "hundred"];
     let zeros = ['000000', '000', '']
@@ -52,4 +54,4 @@ const parseInt = string => {
 //Test Cases:
 // console.log(parseInt('one'), 1);
 // console.log(parseInt('twenty'), 20);
-console.log(parseInt('two hundred forty-six'), 246);
+console.log(parseInt('two hundred and forty-six'), 246);
