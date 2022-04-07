@@ -40,10 +40,6 @@ Array.prototype.sameStructureAs = function (other) {
         let item1 = temp1.shift();
         let item2 = temp2.shift();
 
-        // console.log(temp1,'|',temp2)
-        // console.log(item1,'||',item2)
-        // console.log(Array.isArray(item1) ,'|||', Array.isArray(item2))
-
         if(temp1.length !== temp2.length){
             res = false;
             break;
@@ -65,32 +61,13 @@ Array.prototype.sameStructureAs = function (other) {
             holder2 = [];
         }
 
-
-        // console.log(temp1 + '<-Temp 1')
-        // console.log(temp2, '<-Temp 2')
-        // console.log('-------------')
-
-        // console.log(holder1)
         if (temp1.length === 0) {
             return res;
         }
 
     };
     return res
-
-
-
-
-    // Note: You are given a function isArray(o) that returns
-    // whether its argument is an array.
 };
-
-/*
-Ideas: tempted to use a while loop to see if each item is an array, if they are an matching in the same format we pop them out and dive another layer deeper?
-Will be using this a lot.
-*/
-
-
 
 //Test Cases:
 // let test1 = [1, 1, []].sameStructureAs([2, 2, 2]);
