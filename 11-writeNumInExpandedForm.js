@@ -10,7 +10,13 @@ NOTE: All numbers will be whole numbers greater than 0.
 */
 
 const expandedForm = num => {
+    //Final Arr
     let strArr = [];
+    /*
+    Turn the number to an array and reverse it
+    Loop over it and constantly increment the tens counter
+    Multiply the number by the tens coutner, if it is not zero then push it into the arr.
+    */
     num
         .toString()
         .split('')
@@ -28,7 +34,7 @@ const expandedForm = num => {
             }
 
         })
-
+    //Join it into a string
     return strArr.join(' + ');
 }
 
