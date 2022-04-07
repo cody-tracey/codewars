@@ -29,7 +29,7 @@ const doneOrNot = board => {
     //Get my columns in row format
     for (let i = 0; i < board.length; i++) {
         let temp = [];
-        board.map(item => temp.push(item[i]));
+        board.forEach(item => temp.push(item[i]));
         rowsMaster.push(temp)
     };
 
@@ -63,12 +63,11 @@ const doneOrNot = board => {
 
 
     // Check to see if each row has 1-9
-    rowsMaster.map(i => {
+    rowsMaster.forEach(i => {
         let copy = i;
         copy = copy.sort().join('')
         if (copy !== test) {
             done = false;
-            console.log(i,"row")
         }
     })
 
