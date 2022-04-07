@@ -24,7 +24,7 @@ const solution = number => {
     let count = number;
     let str = '';
 
-    val.map((item, index) => {
+    val.forEach((item, index) => {
         while (count >= item) {
             str += rom[index];
             count -= item;
