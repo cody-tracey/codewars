@@ -14,7 +14,7 @@ const solution = str => {
     if (str.length === 0) return [];
 
     //Split so we can map, if index is even push the item in, if it is odd add it to the last item
-    str.split('').map((item, index) => {
+    str.split('').forEach((item, index) => {
         if (index % 2 === 0) {
             res.push(item)
         } else {
