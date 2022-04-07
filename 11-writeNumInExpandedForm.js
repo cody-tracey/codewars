@@ -11,21 +11,23 @@ NOTE: All numbers will be whole numbers greater than 0.
 
 const expandedForm = num => {
     let strArr = [];
-    let arr = num.toString().split('').reverse();
+    num
+        .toString()
+        .split('')
+        .reverse()
+        .forEach((item, index) => {
+            let n = parseInt(item)
+            let tenth = '1'
+            while (tenth.length < index + 1) {
+                tenth += '0';
+            };
 
-    arr.map((item, index) => {
-        let n = parseInt(item)
-        let tenth = '1'
-        while (tenth.length < index + 1) {
-            tenth += '0';
-        };
+            let num = n * parseInt(tenth);
+            if (num !== 0) {
+                strArr.unshift(num);
+            }
 
-        let num = n * parseInt(tenth);
-        if (num !== 0) {
-            strArr.unshift(num);
-        } 
-
-    })
+        })
 
     return strArr.join(' + ');
 }
