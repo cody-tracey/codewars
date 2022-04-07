@@ -23,9 +23,9 @@ const score = dice => {
     let score = 0;
     let rolls = [0, 0, 0, 0, 0, 0];
 
-    dice.map((i) => rolls[i - 1] += 1);
+    dice.forEach((i) => rolls[i - 1] += 1);
     
-    rolls.map((item, index) => {
+    rolls.forEach((item, index) => {
         let die = index + 1
         switch (die) {
             case 2:
@@ -46,12 +46,8 @@ const score = dice => {
                 else if (item > 3) score += (500 + (item - 3) * 50);
                 else score += item * 50;
                 break;
-
         }
     })
-
-
-
     return score;
 };
 
