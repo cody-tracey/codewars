@@ -11,20 +11,42 @@ There will always be at least one number in the input string.
 Output string must be two numbers separated by a single space, and highest number is first.
 */
 
+//Original
+// const highAndLow = numbers => {
+//     //Declare final answer vars
+//     let high;
+//     let low;
+
+//     //Get an arr to work with
+//     let arr = numbers.toString().split(' ');
+
+//     //Loop over the arr, turn each item into a number and do some comparisons
+//     arr.map(i => {
+//         let n = parseInt(i);
+//         if (high === undefined || n > high) high = n;
+//         if (low === undefined || n < low) low = n;
+//     });
+
+//     //Spit back the answer
+//     return `${high} ${low}`
+// };
+
+//Refactored
 const highAndLow = numbers => {
     //Declare final answer vars
     let high;
     let low;
 
     //Get an arr to work with
-    let arr = numbers.toString().split(' ');
-    
     //Loop over the arr, turn each item into a number and do some comparisons
-    arr.map(i => {
-        let n = parseInt(i);
-        if (high === undefined || n > high) high = n;
-        if (low === undefined || n < low) low = n;
-    });
+    numbers
+        .toString()
+        .split(' ')
+        .forEach(i => {
+            let n = parseInt(i);
+            if (high === undefined || n > high) high = n;
+            if (low === undefined || n < low) low = n;
+        });
 
     //Spit back the answer
     return `${high} ${low}`
