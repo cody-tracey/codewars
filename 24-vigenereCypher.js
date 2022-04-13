@@ -41,9 +41,30 @@ c.encode('CODEWARS'); // returns 'CODEWARS'
 function VigenèreCipher(key, abc) {
 
     this.encode = (str) => {
-        };
+        let a = abc.split('');
+        let k = key.split('');
+        return str.split('').map((curr, i) => {
+            let j = i % k.length;
+            let pos = a.indexOf(curr);
+            let add = a.indexOf(k[j]);
+            let newPos = (pos + add) % a.length;
+            if (pos > -1) return a[newPos]
+            else return curr;
+        }).join('');
+
+    };
     this.decode = (str) => {
-        
+        let a = abc.split('');
+        let aR = abc.split('').reverse();
+        let k = key.split('');
+        return str.split('').map((curr, i) => {
+            let j = i % k.length;
+            let pos = aR.indexOf(curr);
+            let add = a.indexOf(k[j]);
+            let newPos = (pos + add) % a.length;
+            if (pos > -1) return aR[newPos]
+            else return curr;
+        }).join('');
     };
 }
 
