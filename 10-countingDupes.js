@@ -20,7 +20,7 @@ const duplicateCount = text => {
     let dupe = []
 
     //Put to lowercase, into an arr, then loop over it. First time we encounter a letter it goes into letters arr, second time it goes into dupe and count is incremented, on subsequent hits of the same letter nothing happens.
-    text.toLowerCase().split('').map(i => {
+    text.toLowerCase().split('').forEach(i => {
         if(!letters.includes(i)) letters.push(i)
         else{
             if(!dupe.includes(i)){

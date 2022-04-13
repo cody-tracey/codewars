@@ -32,7 +32,7 @@ const perimeter = n => {
 
 //Test Cases:
 console.log(perimeter(0) === 4);
-console.log(perimeter(5), 80);
-console.log(perimeter(7), 216);
-console.log(perimeter(20), 114624);
-console.log(perimeter(30), 14098308);
+console.log(perimeter(5) === 80);
+console.log(perimeter(7) === 216);
+console.log(perimeter(20) === 114624);
+console.log(perimeter(30) === 14098308);

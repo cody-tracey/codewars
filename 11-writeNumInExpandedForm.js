@@ -10,23 +10,31 @@ NOTE: All numbers will be whole numbers greater than 0.
 */
 
 const expandedForm = num => {
+    //Final Arr
     let strArr = [];
-    let arr = num.toString().split('').reverse();
+    /*
+    Turn the number to an array and reverse it
+    Loop over it and constantly increment the tens counter
+    Multiply the number by the tens coutner, if it is not zero then push it into the arr.
+    */
+    num
+        .toString()
+        .split('')
+        .reverse()
+        .forEach((item, index) => {
+            let n = parseInt(item)
+            let tenth = '1'
+            while (tenth.length < index + 1) {
+                tenth += '0';
+            };
 
-    arr.map((item, index) => {
-        let n = parseInt(item)
-        let tenth = '1'
-        while (tenth.length < index + 1) {
-            tenth += '0';
-        };
+            let num = n * parseInt(tenth);
+            if (num !== 0) {
+                strArr.unshift(num);
+            }
 
-        let num = n * parseInt(tenth);
-        if (num !== 0) {
-            strArr.unshift(num);
-        } 
-
-    })
-
+        })
+    //Join it into a string
     return strArr.join(' + ');
 }
 

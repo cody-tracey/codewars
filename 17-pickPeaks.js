@@ -11,7 +11,6 @@ Have fun!
 */
 
 const pickPeaks = arr => {
-    console.log(arr)
     let res = {
         pos: [],
         peaks: []
@@ -42,8 +41,6 @@ const pickPeaks = arr => {
         let next = arr[i + 1];
         let prev = arr[i - 1];
 
-        // console.log(`I:${i}\tPrevious: ${prev}\tCurrent: ${curr}\tNext: ${next}\tPos:${pos}\tPeak:${peak}`);
-
         //If the current item is greater than the next item, and greater than the previous item we set it as the current peak/pos
         if (curr >= next && curr > prev) {
             peak = curr;
@@ -68,9 +65,7 @@ const pickPeaks = arr => {
                 res.pos.push(pos);
                 res.peaks.push(peak);
             }
-
         };
-
     };
     return res
 };

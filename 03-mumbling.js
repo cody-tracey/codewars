@@ -8,11 +8,32 @@ accum("cwAt") -> "C-Ww-Aaa-Tttt"
 The parameter of accum is a string which includes only letters from a..z and A..Z.
 */
 
+//Original
+// const accum = s => {
+//     //Transform text into all lowercase to make it equal, and into an arr
+//     let sArr = s.toLowerCase().split('');
+//     //Map over it and push that item into a temp arr index+1 times
+//     let longerArr = sArr.map((item, index) => {
+//         let holder = [];
+//         while (holder.length <= index) {
+//             holder.push(item)
+//         }
+//         //Transform the first letter in the arr to capital
+//         holder[0] = holder[0].toUpperCase();
+//         //Join it back to a str and return it
+//         return holder.join('')
+//     });
+//     //Return the longerArr as a str
+//     return longerArr.join('-')
+// };
+
+//Refactored
 const accum = s => {
-    //Transform text into all lowercase to make it equal, and into an arr
-    let sArr = s.toLowerCase().split('');
-    //Map over it and push that item into a temp arr index+1 times
-    let longerArr = sArr.map((item, index) => {
+    /*
+    Transforms the text to all lovercase then splits and maps over it.
+    It pushed the item in x times where x is the index, then transforms the first item to uppercase.
+    */
+    return s.toLowerCase().split('').map((item, index) => {
         let holder = [];
         while (holder.length <= index) {
             holder.push(item)
@@ -21,11 +42,9 @@ const accum = s => {
         holder[0] = holder[0].toUpperCase();
         //Join it back to a str and return it
         return holder.join('')
-    });
-    //Return the longerArr as a str
-    return longerArr.join('-')
-};
+    }).join('-');
 
+};
 
 
 //Test Cases:
