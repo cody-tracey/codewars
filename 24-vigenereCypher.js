@@ -37,8 +37,19 @@ Any character not in the alphabet must be left as is. For example (following fro
 c.encode('CODEWARS'); // returns 'CODEWARS'
 */
 
+//Need to make the code more dry but for the moment it is working fine.
 
 function VigenèreCipher(key, abc) {
+
+    /*
+    At the high level both the encode and decode work the same way with one key differnce, if they are moving forward or backwards in the key.
+
+    I break down the key, and the alphabet being used into arrays, I then split the string and being to map over it.
+    I create a var that determines which position in the key we are at so we can figure out how far to move it forward. 
+    Find the index of the key item, and the current item then move it forward or backwards that many.
+    If the item is not in the provided alphabet we just return it. FInally we join the string back together.
+    
+    */
 
     this.encode = (str) => {
         let a = abc.split('');
