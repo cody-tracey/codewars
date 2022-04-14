@@ -47,44 +47,30 @@ nulla et dolor.
 */
 
 const justify = (text, width) => {
-    let textArr = text.split(' ');
-    let resArr = [];
-
-
-    textArr.forEach((i, index) => {
-        let l = resArr[resArr.length - 1];
-        if (index === 0) {
-            resArr.push([i])
-        }
-        else if (l.join(' ').length + i.length + 1 <= width) {
-            l.push(i)
-        }
-        else {
-            resArr.push([i])
-        }
-    });
-
-
-    let r = resArr.map((i,index) => {
-        if (index !== resArr.length-1) {
-            let holder = i.pop();
-            let l = width - holder.length;
+    let w = text.split(' ').reduce((total,curr,index) => {
+        let l = total[total.length - 1];
+        if(index === 0){
+            total.push([curr]);
+            return total;
+        }else if (l.join(' ').length + curr.length + 1 <= width) {
+            l.push(curr)
+            return total;
+        }else {
             let c = 0;
-            while (i.join('').length < l) {
-                
-                i[c % i.length] += ' ';
+            while (l.join('').length < width) { 
+                l[c % (l.length - 1)] += ' ';
                 c++
             };
-            i.push(holder);
-            return i.join('')
+            l = l.join('');
+            total.push([curr]);
+            return total;
         }
-        else {
-        return i.join(' ')            
-        }
+    },[])
 
-    })
-
-    return r.join('\n');
+    return w.map((curr,i) => {
+        if(i !== w.length - 1) return curr.join('')
+        else return curr.join(' ');
+    }).join('\n');
 }
 
 //Test Cases:
@@ -126,4 +112,4 @@ fringilla,   ante  odio  porta
 lacus,   ut   elementum  justo
 nulla et dolor.`
 
-console.log(r)
+console.log(r === s)
